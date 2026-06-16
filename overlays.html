@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+<style>
+/* ============================================================
+   СМОТРЕЛКА — Colors & Type foundations
+   Source of truth: "Style values with light colors.pdf" + Logo.png
+   Font: Geist (self-hosted variable, full Cyrillic) — brand font
+   ============================================================ */
+
+/* Geist — Vercel's neutral grotesque, variable weight 100–900, Latin + Cyrillic */
+
+
+
+:root {
+  /* ---- Brand ---------------------------------------------- */
+  --primary: #7600FF;            /* primary violet */
+  --primary-hover: #6400DB;      /* darkened ~10% for hover */
+  --primary-press: #5400B8;      /* darkened ~18% for press */
+
+  /* ---- Surfaces ------------------------------------------- */
+  --background: #FFFFFF;          /* base page background */
+  --accent: #F9F9FE;             /* faint violet-tinted fill (hover rows, wells) */
+  --accent-2: #E7E6EB;           /* neutral fill (chips, skeletons) */
+  --accent-3: #C0C0C4;           /* stronger neutral (scrollbar, dividers on dark) */
+  --border: #E4E7EB;             /* hairline borders */
+
+  /* ---- Foreground ----------------------------------------- */
+  --foreground: #2E3033;         /* primary text */
+  --muted-foreground: #616367;   /* secondary / meta text */
+
+  /* ---- Secondary (success / green) ------------------------ */
+  --secondary: #F1FEED;          /* green tint background (badges, banners) */
+  --secondary-foreground: #3F722E;/* green text on green tint */
+
+  /* ---- State opacities ------------------------------------ */
+  --disabled-value-opacity: 0.31; /* @kind other */
+  --disabled-color-opacity: 0.50;
+
+  /* ---- Radius --------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* ---- Spacing scale (8 / 16 / 32 / 48 / 64) -------------- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 32px;
+  --space-4: 48px;
+  --space-5: 64px;
+
+  /* ---- Icon sizing ---------------------------------------- */
+  --icon: 32px;
+
+  /* ---- Elevation (soft, low) ------------------------------ */
+  --shadow-sm: 0 1px 2px rgba(46,48,51,0.06);
+  --shadow-md: 0 4px 16px rgba(46,48,51,0.08);
+  --shadow-lg: 0 12px 32px rgba(46,48,51,0.12);
+
+  /* ---- Type family ---------------------------------------- */
+  --font-sans: 'Geist', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* ---- Type tokens (size / line-height / weight / tracking) */
+  --h1-size: 45px;  --h1-lh: 44px;  --h1-weight: 700; --h1-tracking: -2px;
+  --h2-size: 34px;  --h2-lh: 43px;  --h2-weight: 600; --h2-tracking: -1px;
+  --h3-size: 23px;  --h3-lh: 28px;  --h3-weight: 600; --h3-tracking: -0.4px;
+  --h4-size: 20px;  --h4-lh: 26px;  --h4-weight: 600; --h4-tracking: -0.2px;
+  --p-md-size: 20px; --p-md-lh: 28px; --p-md-weight: 500;
+  --p-sm-size: 17px; --p-sm-lh: 24px; --p-sm-weight: 500;
+  --p-mini-size: 14px; --p-mini-lh: 20px; --p-mini-weight: 500;
+  --caption-size: 12px; --caption-lh: 16px; --caption-weight: 600;
+}
+
+/* ============================================================
+   Semantic type classes
+   ============================================================ */
+.text-h1 { font-family: var(--font-sans); font-size: var(--h1-size); line-height: var(--h1-lh); font-weight: var(--h1-weight); letter-spacing: var(--h1-tracking); color: var(--foreground); }
+.text-h2 { font-family: var(--font-sans); font-size: var(--h2-size); line-height: var(--h2-lh); font-weight: var(--h2-weight); letter-spacing: var(--h2-tracking); color: var(--foreground); }
+.text-h3 { font-family: var(--font-sans); font-size: var(--h3-size); line-height: var(--h3-lh); font-weight: var(--h3-weight); letter-spacing: var(--h3-tracking); color: var(--foreground); }
+.text-h4 { font-family: var(--font-sans); font-size: var(--h4-size); line-height: var(--h4-lh); font-weight: var(--h4-weight); letter-spacing: var(--h4-tracking); color: var(--foreground); }
+.text-p   { font-family: var(--font-sans); font-size: var(--p-md-size); line-height: var(--p-md-lh); font-weight: var(--p-md-weight); color: var(--foreground); }
+.text-p-sm { font-family: var(--font-sans); font-size: var(--p-sm-size); line-height: var(--p-sm-lh); font-weight: var(--p-sm-weight); color: var(--foreground); }
+.text-p-mini { font-family: var(--font-sans); font-size: var(--p-mini-size); line-height: var(--p-mini-lh); font-weight: var(--p-mini-weight); color: var(--muted-foreground); }
+.text-caption { font-family: var(--font-sans); font-size: var(--caption-size); line-height: var(--caption-lh); font-weight: var(--caption-weight); letter-spacing: 0.2px; color: var(--muted-foreground); }
+.text-link { color: var(--primary); text-decoration: none; cursor: pointer; }
+.text-link:hover { text-decoration: underline; }
+
+body { margin:0; background:#F1F1F5; }
+svg[class*="lucide"], i[data-lucide] { flex: none !important; max-width: 100%; }
+</style>
+</head>
+<body>
+
+
+<div style="font-family: Geist, sans-serif; color: var(--foreground); padding: 48px 40px 80px; display: flex; flex-direction: column; gap: 32px; max-width: 1320px; margin: 0 auto">
+
+  <!-- ============ INTRO ============ -->
+  <section data-screen-label="Формы и оверлеи — контекст" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+      <img src="data:image/png;base64,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" alt="" style="height: 32px">
+      <h1 style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -1px">Формы и оверлеи</h1>
+      <span style="font-size: 11px; font-weight: 600; color: var(--primary); background: var(--accent); border: 1px solid var(--accent-2); border-radius: 999px; padding: 3px 10px">канон стекло + пузырь</span>
+    </div>
+    <p style="margin: 12px 0 0; font-size: 15px; color: var(--muted-foreground); max-width: 760px; line-height: 1.5">Фундамент ввода и обратной связи: поля, переключатели, валидация — и всплывающие слои (меню, модалки, тосты, панель уведомлений). Контролы наследуют пузырь 12 / 12 / 12 / 4; всплывающие слои — стекло, как хром.</p>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 24px">
+      <div style="background: var(--accent); border-radius: 12px; padding: 20px 24px">
+        <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--muted-foreground); margin-bottom: 10px">КОНТРОЛЫ</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.7">
+          <li>Пузырь 12 / 12 / 12 / 4 — поля, select, кнопки</li>
+          <li>Фокус — рамка 1.5px фиолетовая</li>
+          <li>Тоггл — пилюля; радио — круг; чекбокс — мини-пузырь</li>
+        </ul>
+      </div>
+      <div style="background: var(--accent); border-radius: 12px; padding: 20px 24px">
+        <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--muted-foreground); margin-bottom: 10px">СЛОИ</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.7">
+          <li>Меню и подсказки — стекло + shadow-md</li>
+          <li>Модалки — стекло + shadow-lg, подложка-дым</li>
+          <li>Тост — стекло, авто-исчезание</li>
+        </ul>
+      </div>
+      <div style="background: #FBEAEA; border-radius: 12px; padding: 20px 24px">
+        <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: #B23A3A; margin-bottom: 10px">ПРЕДЛОЖЕНИЕ В ТОКЕНЫ</div>
+        <p style="margin: 0; font-size: 13px; line-height: 1.6; color: var(--foreground)">В системе нет danger-цвета. Для ошибок предлагаю <b>--danger #D14343</b> / фон <b>#FBEAEA</b> — сдержанный, не спорит с violet. Помечено по всему макету.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 1. TEXT FIELDS ============ -->
+  <section data-screen-label="Текстовые поля" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ФОРМЫ · 1</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Текстовое поле</h2>
+    <p style="margin: 0 0 28px; font-size: 14px; color: var(--muted-foreground)">Подпись сверху, поле-пузырь, вспомогательный текст снизу. Высота 44px (hit-area). Состояния:</p>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px">
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Обычное</div>
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px">Название видео</label>
+        <div style="height: 44px; border: 1px solid var(--border); border-radius: 12px 12px 12px 4px; background: #fff; display: flex; align-items: center; padding: 0 14px">
+          <span style="font-size: 15px; color: var(--accent-3)">Введите название</span>
+        </div>
+        <div style="font-size: 12px; color: var(--muted-foreground); margin-top: 6px">Видно в результатах поиска</div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Фокус</div>
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px">Название видео</label>
+        <div style="height: 44px; border: 1.5px solid var(--primary); border-radius: 12px 12px 12px 4px; background: #fff; display: flex; align-items: center; padding: 0 13.5px">
+          <span style="font-size: 15px">Плов в казане<span style="display: inline-block; width: 1.5px; height: 17px; background: var(--primary); margin-left: 1px; vertical-align: text-bottom"></span></span>
+        </div>
+        <div style="font-size: 12px; color: var(--muted-foreground); margin-top: 6px">Видно в результатах поиска</div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Заполнено · валидно</div>
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px">Название видео</label>
+        <div style="height: 44px; border: 1px solid var(--border); border-radius: 12px 12px 12px 4px; background: #fff; display: flex; align-items: center; gap: 8px; padding: 0 14px">
+          <span style="flex: 1; font-size: 15px">Плов в казане — рецепт</span>
+          <i data-lucide="check" style="width: 18px; height: 18px; color: var(--secondary-foreground)"></i>
+        </div>
+        <div style="font-size: 12px; color: var(--muted-foreground); margin-top: 6px; display: flex; justify-content: space-between"><span>Видно в результатах поиска</span><span>22 / 100</span></div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Ошибка <span style="color: #D14343">· danger</span></div>
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px">Название видео</label>
+        <div style="height: 44px; border: 1.5px solid #D14343; border-radius: 12px 12px 12px 4px; background: #fff; display: flex; align-items: center; gap: 8px; padding: 0 13.5px">
+          <span style="flex: 1; font-size: 15px"> </span>
+          <i data-lucide="circle-alert" style="width: 18px; height: 18px; color: #D14343"></i>
+        </div>
+        <div style="font-size: 12px; color: #D14343; margin-top: 6px; display: flex; align-items: center; gap: 5px"><i data-lucide="circle-alert" style="width: 13px; height: 13px"></i>Название обязательно</div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Выключено <span style="color: var(--accent-3)">· 50% / 31%</span></div>
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; opacity: 0.5">Название видео</label>
+        <div style="height: 44px; border: 1px solid var(--border); border-radius: 12px 12px 12px 4px; background: var(--accent); display: flex; align-items: center; padding: 0 14px; opacity: 0.5">
+          <span style="font-size: 15px; opacity: 0.62">Введите название</span>
+        </div>
+        <div style="font-size: 12px; color: var(--muted-foreground); margin-top: 6px; opacity: 0.5">Недоступно при публикации</div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">С префиксом</div>
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px">Ссылка на канал</label>
+        <div style="height: 44px; border: 1px solid var(--border); border-radius: 12px 12px 12px 4px; background: #fff; display: flex; align-items: center; overflow: hidden">
+          <span style="font-size: 15px; color: var(--muted-foreground); background: var(--accent-2); align-self: stretch; display: flex; align-items: center; padding: 0 12px">smotrelka.ru/@</span>
+          <span style="flex: 1; font-size: 15px; padding: 0 12px">katya</span>
+        </div>
+        <div style="font-size: 12px; color: var(--muted-foreground); margin-top: 6px">Латиница, цифры, нижнее подчёркивание</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 2. TEXTAREA + SELECT ============ -->
+  <section data-screen-label="Textarea и select" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ФОРМЫ · 2</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Многострочное поле и выбор</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 20px">
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Textarea · описание</div>
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px">Описание</label>
+        <div style="border: 1.5px solid var(--primary); border-radius: 12px 12px 12px 4px; background: #fff; padding: 12px 14px; min-height: 110px">
+          <span style="font-size: 15px; line-height: 1.5">Готовим настоящий узбекский плов в казане на открытом огне. Все пропорции и тайминги — в описании.<span style="display: inline-block; width: 1.5px; height: 17px; background: var(--primary); margin-left: 1px; vertical-align: text-bottom"></span></span>
+        </div>
+        <div style="font-size: 12px; color: var(--muted-foreground); margin-top: 6px; display: flex; justify-content: space-between"><span>Поддерживаются тайм-коды</span><span>118 / 5000</span></div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Select · закрыт и открыт (на стекле)</div>
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px">Категория</label>
+        <div style="position: relative">
+          <div style="height: 44px; border: 1.5px solid var(--primary); border-radius: 12px 12px 12px 4px; background: #fff; display: flex; align-items: center; gap: 8px; padding: 0 13.5px; cursor: pointer">
+            <span style="flex: 1; font-size: 15px">Кулинария</span>
+            <i data-lucide="chevron-down" style="width: 18px; height: 18px; color: var(--muted-foreground)"></i>
+          </div>
+          <div style="position: absolute; left: 0; right: 0; top: 50px; z-index: 5; border-radius: 12px 12px 12px 4px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(14px); border: 1px solid rgba(228, 231, 235, 0.7); box-shadow: var(--shadow-md); padding: 8px; display: flex; flex-direction: column; gap: 2px">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 15px; background: var(--accent); color: var(--primary); font-weight: 600; cursor: pointer"><i data-lucide="check" style="width: 16px; height: 16px"></i>Кулинария</div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 15px; cursor: pointer; padding-left: 38px">Музыка</div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 15px; cursor: pointer; padding-left: 38px">Игры</div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 15px; cursor: pointer; padding-left: 38px">Технологии</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 3. CHECKBOX / RADIO / TOGGLE ============ -->
+  <section data-screen-label="Чекбокс, радио, тоггл" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ФОРМЫ · 3</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Выбор и переключатели</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 20px">
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 20px">
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 16px">Чекбокс · мини-пузырь</div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <label style="display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="width: 22px; height: 22px; border-radius: 7px 7px 7px 2px; background: var(--primary); display: flex; align-items: center; justify-content: center; flex: none"><i data-lucide="check" style="width: 15px; height: 15px; color: #fff"></i></span><span style="font-size: 15px">Опубликовать сразу</span></label>
+          <label style="display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="width: 22px; height: 22px; border-radius: 7px 7px 7px 2px; border: 1.5px solid var(--border); flex: none"></span><span style="font-size: 15px">Уведомить подписчиков</span></label>
+          <label style="display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="width: 22px; height: 22px; border-radius: 7px 7px 7px 2px; background: var(--primary); display: flex; align-items: center; justify-content: center; flex: none"><span style="width: 11px; height: 2px; background: #fff; border-radius: 2px"></span></span><span style="font-size: 15px">Часть выбрана</span></label>
+          <label style="display: flex; align-items: center; gap: 12px; cursor: not-allowed; opacity: 0.5"><span style="width: 22px; height: 22px; border-radius: 7px 7px 7px 2px; border: 1.5px solid var(--border); flex: none"></span><span style="font-size: 15px">Недоступно</span></label>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 20px">
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 16px">Радио · круг</div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <label style="display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="width: 22px; height: 22px; border-radius: 999px; border: 1.5px solid var(--primary); display: flex; align-items: center; justify-content: center; flex: none"><span style="width: 11px; height: 11px; border-radius: 999px; background: var(--primary)"></span></span><span style="font-size: 15px">Для всех</span></label>
+          <label style="display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="width: 22px; height: 22px; border-radius: 999px; border: 1.5px solid var(--border); flex: none"></span><span style="font-size: 15px">По ссылке</span></label>
+          <label style="display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="width: 22px; height: 22px; border-radius: 999px; border: 1.5px solid var(--border); flex: none"></span><span style="font-size: 15px">Только я</span></label>
+          <label style="display: flex; align-items: center; gap: 12px; cursor: not-allowed; opacity: 0.5"><span style="width: 22px; height: 22px; border-radius: 999px; border: 1.5px solid var(--border); flex: none"></span><span style="font-size: 15px">Премьера</span></label>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 20px">
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 16px">Тоггл · пилюля</div>
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; justify-content: space-between"><span style="font-size: 15px">Комментарии</span><span style="width: 44px; height: 26px; border-radius: 999px; background: var(--primary); position: relative; flex: none"><span style="position: absolute; top: 3px; left: 21px; width: 20px; height: 20px; border-radius: 999px; background: #fff"></span></span></label>
+          <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; justify-content: space-between"><span style="font-size: 15px">Сохранять черновики</span><span style="width: 44px; height: 26px; border-radius: 999px; background: var(--accent-2); position: relative; flex: none"><span style="position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 999px; background: #fff; box-shadow: var(--shadow-sm)"></span></span></label>
+          <label style="display: flex; align-items: center; gap: 12px; cursor: not-allowed; justify-content: space-between; opacity: 0.5"><span style="font-size: 15px">Монетизация</span><span style="width: 44px; height: 26px; border-radius: 999px; background: var(--accent-2); position: relative; flex: none"><span style="position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 999px; background: #fff"></span></span></label>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 4. DROPDOWN MENUS ============ -->
+  <section data-screen-label="Меню" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ОВЕРЛЕИ · 1</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Выпадающие меню</h2>
+    <p style="margin: 0 0 24px; font-size: 14px; color: var(--muted-foreground)">Стеклянная панель в форме пузыря, как подсказки поиска. Пункты — мини-пузыри в hover.</p>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start">
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Меню аватара</div>
+        <div style="background: var(--accent); border-radius: 12px; padding: 24px; display: flex; justify-content: center">
+          <div style="width: 260px; border-radius: 16px 16px 16px 6px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(14px); border: 1px solid rgba(228, 231, 235, 0.7); box-shadow: var(--shadow-md); overflow: hidden">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border)">
+              <div style="width: 40px; height: 40px; border-radius: 999px; background: var(--primary); color: #fff; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center">К</div>
+              <div style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600">Катя Морозова</span><span style="font-size: 12px; color: var(--muted-foreground)">@katya · автор</span></div>
+            </div>
+            <div style="padding: 8px; display: flex; flex-direction: column; gap: 2px">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 14px; cursor: pointer"><i data-lucide="user" style="width: 18px; height: 18px"></i>Мой канал</div>
+              <div style="display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 14px; cursor: pointer"><i data-lucide="clapperboard" style="width: 18px; height: 18px"></i>Творческая студия</div>
+              <div style="display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 14px; cursor: pointer"><i data-lucide="settings" style="width: 18px; height: 18px"></i>Настройки</div>
+              <div style="height: 1px; background: var(--border); margin: 6px 4px"></div>
+              <div style="display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 14px; cursor: pointer"><i data-lucide="log-out" style="width: 18px; height: 18px"></i>Выйти</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Контекстное «⋯» на карточке</div>
+        <div style="background: var(--accent); border-radius: 12px; padding: 24px; display: flex; justify-content: center">
+          <div style="width: 240px; border-radius: 16px 16px 16px 6px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(14px); border: 1px solid rgba(228, 231, 235, 0.7); box-shadow: var(--shadow-md); padding: 8px; display: flex; flex-direction: column; gap: 2px">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 14px; cursor: pointer"><i data-lucide="clock" style="width: 18px; height: 18px"></i>Смотреть позже</div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 14px; cursor: pointer"><i data-lucide="list-plus" style="width: 18px; height: 18px"></i>В плейлист</div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 14px; cursor: pointer"><i data-lucide="share-2" style="width: 18px; height: 18px"></i>Поделиться</div>
+            <div style="height: 1px; background: var(--border); margin: 6px 4px"></div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 10px 10px 10px 3px; font-size: 14px; cursor: pointer; color: #D14343"><i data-lucide="flag" style="width: 18px; height: 18px"></i>Пожаловаться</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 5. MODALS ============ -->
+  <section data-screen-label="Модальные окна" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ОВЕРЛЕИ · 2</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Модальные окна</h2>
+    <p style="margin: 0 0 24px; font-size: 14px; color: var(--muted-foreground)">Стекло + shadow-lg на дымовой подложке. Радиус-пузырь крупного размера 20 / 20 / 20 / 6.</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px">
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Подтверждение · опасное действие</div>
+        <div style="position: relative; border-radius: 14px; overflow: hidden; background: rgba(46, 48, 51, 0.45); padding: 40px 24px; display: flex; justify-content: center">
+          <div style="width: 100%; max-width: 400px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(16px); border-radius: 20px 20px 20px 6px; box-shadow: var(--shadow-lg); padding: 28px">
+            <div style="width: 48px; height: 48px; border-radius: 14px 14px 14px 4px; background: #FBEAEA; display: flex; align-items: center; justify-content: center; margin-bottom: 16px"><i data-lucide="trash-2" style="width: 24px; height: 24px; color: #D14343"></i></div>
+            <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.4px">Удалить видео?</h3>
+            <p style="margin: 0 0 24px; font-size: 14px; color: var(--muted-foreground); line-height: 1.5">«Плов в казане — рецепт для новичков» будет удалено навсегда. Это действие нельзя отменить.</p>
+            <div style="display: flex; gap: 10px; justify-content: flex-end">
+              <button style="height: 40px; padding: 0 18px; border-radius: 12px 12px 12px 4px; border: 1px solid var(--border); background: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Отмена</button>
+              <button style="height: 40px; padding: 0 18px; border-radius: 12px 12px 12px 4px; border: none; background: #D14343; color: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Удалить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">«Поделиться»</div>
+        <div style="position: relative; border-radius: 14px; overflow: hidden; background: rgba(46, 48, 51, 0.45); padding: 40px 24px; display: flex; justify-content: center">
+          <div style="width: 100%; max-width: 400px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(16px); border-radius: 20px 20px 20px 6px; box-shadow: var(--shadow-lg); padding: 28px">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px">
+              <h3 style="margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.4px">Поделиться</h3>
+              <div style="width: 36px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: pointer"><i data-lucide="x" style="width: 20px; height: 20px"></i></div>
+            </div>
+            <div style="display: flex; gap: 16px; margin-bottom: 22px">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer"><div style="width: 48px; height: 48px; border-radius: 999px; background: var(--accent-2); display: flex; align-items: center; justify-content: center"><i data-lucide="link" style="width: 22px; height: 22px"></i></div><span style="font-size: 12px; color: var(--muted-foreground)">Ссылка</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer"><div style="width: 48px; height: 48px; border-radius: 999px; background: var(--accent-2); display: flex; align-items: center; justify-content: center"><i data-lucide="message-circle" style="width: 22px; height: 22px"></i></div><span style="font-size: 12px; color: var(--muted-foreground)">Сообщение</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer"><div style="width: 48px; height: 48px; border-radius: 999px; background: var(--accent-2); display: flex; align-items: center; justify-content: center"><i data-lucide="mail" style="width: 22px; height: 22px"></i></div><span style="font-size: 12px; color: var(--muted-foreground)">Почта</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer"><div style="width: 48px; height: 48px; border-radius: 999px; background: var(--accent-2); display: flex; align-items: center; justify-content: center"><i data-lucide="qr-code" style="width: 22px; height: 22px"></i></div><span style="font-size: 12px; color: var(--muted-foreground)">QR-код</span></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 12px 12px 12px 4px; background: var(--accent); padding: 4px 4px 4px 14px">
+              <span style="flex: 1; font-size: 14px; color: var(--muted-foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis">smotrelka.ru/v/k8s2d9</span>
+              <button style="height: 34px; padding: 0 16px; border-radius: 10px 10px 10px 3px; border: none; background: var(--primary); color: #fff; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; flex: none">Копировать</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 6. TOAST / TOOLTIP / BANNER ============ -->
+  <section data-screen-label="Тост, тултип, баннер" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ОВЕРЛЕИ · 3</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Лёгкая обратная связь</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 20px">
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Тост · авто-исчезание 3с</div>
+        <div style="background: var(--accent); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
+          <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(14px); border: 1px solid rgba(228, 231, 235, 0.7); border-radius: 12px 12px 12px 4px; box-shadow: var(--shadow-md); padding: 12px 16px">
+            <i data-lucide="check" style="width: 18px; height: 18px; color: var(--secondary-foreground)"></i>
+            <span style="font-size: 14px; font-weight: 500">Ссылка скопирована</span>
+          </div>
+          <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(14px); border: 1px solid rgba(228, 231, 235, 0.7); border-radius: 12px 12px 12px 4px; box-shadow: var(--shadow-md); padding: 12px 16px">
+            <i data-lucide="circle-alert" style="width: 18px; height: 18px; color: #D14343"></i>
+            <span style="font-size: 14px; font-weight: 500">Не удалось загрузить</span>
+            <span style="font-size: 14px; font-weight: 600; color: var(--primary); cursor: pointer; margin-left: 4px">Повторить</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Тултип · тёмная капсула</div>
+        <div style="background: var(--accent); border-radius: 12px; padding: 36px 24px; display: flex; justify-content: center; align-items: center; gap: 40px">
+          <div style="position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px">
+            <div style="background: #2E3033; color: #fff; font-size: 13px; font-weight: 500; padding: 7px 11px; border-radius: 8px 8px 8px 3px; white-space: nowrap; position: relative">Сохранить в «Смотреть позже»<span style="position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 8px; height: 8px; background: #2E3033"></span></div>
+            <button style="width: 40px; height: 40px; border-radius: 999px; border: none; background: #fff; box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center; cursor: pointer"><i data-lucide="clock" style="width: 20px; height: 20px"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Баннер · информация</div>
+        <div style="display: flex; align-items: flex-start; gap: 12px; background: var(--accent); border: 1px solid var(--accent-2); border-radius: 12px 12px 12px 4px; padding: 14px 16px">
+          <i data-lucide="info" style="width: 20px; height: 20px; color: var(--primary); flex: none; margin-top: 1px"></i>
+          <div style="flex: 1"><div style="font-size: 14px; font-weight: 600; margin-bottom: 2px">Видео обрабатывается</div><div style="font-size: 13px; color: var(--muted-foreground); line-height: 1.5">Доступно в HD через несколько минут. Можно закрыть страницу.</div></div>
+          <div style="width: 28px; height: 28px; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: pointer"><i data-lucide="x" style="width: 16px; height: 16px"></i></div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Баннер · успех</div>
+        <div style="display: flex; align-items: flex-start; gap: 12px; background: var(--secondary); border-radius: 12px 12px 12px 4px; padding: 14px 16px">
+          <i data-lucide="circle-check" style="width: 20px; height: 20px; color: var(--secondary-foreground); flex: none; margin-top: 1px"></i>
+          <div style="flex: 1"><div style="font-size: 14px; font-weight: 600; margin-bottom: 2px; color: var(--secondary-foreground)">Видео опубликовано</div><div style="font-size: 13px; color: var(--secondary-foreground); opacity: 0.85; line-height: 1.5">Подписчики получили уведомление. Поделитесь ссылкой, чтобы набрать просмотры.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 7. NOTIFICATION PANEL ============ -->
+  <section data-screen-label="Панель уведомлений" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ОВЕРЛЕИ · 4</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Панель уведомлений</h2>
+    <p style="margin: 0 0 24px; font-size: 14px; color: var(--muted-foreground)">Открывается по колокольчику. Непрочитанные — с фиолетовой точкой и фоном --accent.</p>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start">
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">С уведомлениями</div>
+        <div style="background: var(--accent); border-radius: 12px; padding: 24px; display: flex; justify-content: center">
+          <div style="width: 360px; max-width: 100%; border-radius: 16px 16px 16px 6px; background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(14px); border: 1px solid rgba(228, 231, 235, 0.7); box-shadow: var(--shadow-md); overflow: hidden">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--border)">
+              <span style="font-size: 16px; font-weight: 700">Уведомления</span>
+              <span style="font-size: 13px; font-weight: 600; color: var(--primary); cursor: pointer">Прочитать всё</span>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              <div style="display: flex; gap: 12px; padding: 14px 16px; background: var(--accent); cursor: pointer">
+                <div style="width: 40px; height: 40px; border-radius: 999px; background: #3F722E; color: #fff; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; flex: none">К</div>
+                <div style="flex: 1; min-width: 0"><div style="font-size: 14px; line-height: 1.4"><b>Кухня дома</b> опубликовал новое видео: «Плов в казане»</div><div style="font-size: 12px; color: var(--muted-foreground); margin-top: 3px">5 минут назад</div></div>
+                <span style="width: 8px; height: 8px; border-radius: 999px; background: var(--primary); flex: none; margin-top: 6px"></span>
+              </div>
+              <div style="display: flex; gap: 12px; padding: 14px 16px; background: var(--accent); cursor: pointer">
+                <div style="width: 40px; height: 40px; border-radius: 999px; background: var(--primary); color: #fff; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; flex: none">З</div>
+                <div style="flex: 1; min-width: 0"><div style="font-size: 14px; line-height: 1.4"><b>Звук</b> ответил на ваш комментарий</div><div style="font-size: 12px; color: var(--muted-foreground); margin-top: 3px">2 часа назад</div></div>
+                <span style="width: 8px; height: 8px; border-radius: 999px; background: var(--primary); flex: none; margin-top: 6px"></span>
+              </div>
+              <div style="display: flex; gap: 12px; padding: 14px 16px; cursor: pointer">
+                <div style="width: 40px; height: 40px; border-radius: 999px; background: var(--foreground); color: #fff; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; flex: none">Т</div>
+                <div style="flex: 1; min-width: 0"><div style="font-size: 14px; line-height: 1.4"><b>Техно Разбор</b> и ещё 12 человек оценили ваше видео</div><div style="font-size: 12px; color: var(--muted-foreground); margin-top: 3px">вчера</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 12px">Пустое состояние</div>
+        <div style="background: var(--accent); border-radius: 12px; padding: 24px; display: flex; justify-content: center">
+          <div style="width: 360px; max-width: 100%; border-radius: 16px 16px 16px 6px; background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(14px); border: 1px solid rgba(228, 231, 235, 0.7); box-shadow: var(--shadow-md); overflow: hidden">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--border)">
+              <span style="font-size: 16px; font-weight: 700">Уведомления</span>
+            </div>
+            <div style="padding: 48px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px">
+              <div style="width: 56px; height: 56px; border-radius: 18px 18px 18px 5px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 4px"><i data-lucide="bell" style="width: 26px; height: 26px; color: var(--accent-3)"></i></div>
+              <div style="font-size: 15px; font-weight: 600">Нет новых уведомлений</div>
+              <div style="font-size: 13px; color: var(--muted-foreground); line-height: 1.5; max-width: 240px">Здесь появятся новости каналов, ответы и отметки.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+
+<script>window.addEventListener('load',()=>{if(window.lucide)lucide.createIcons();});</script>
+</body>
+</html>
