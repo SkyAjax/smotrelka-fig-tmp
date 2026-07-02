@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   СМОТРЕЛКА — Colors & Type foundations
+   Source of truth: "Style values with light colors.pdf" + Logo.png
+   Font: Geist (self-hosted variable, full Cyrillic) — brand font
+   ============================================================ */
+
+/* Geist — Vercel's neutral grotesque, variable weight 100–900, Latin + Cyrillic */
+
+
+
+:root {
+  /* ---- Brand ---------------------------------------------- */
+  --primary: #7600FF;            /* primary violet */
+  --primary-hover: #6400DB;      /* darkened ~10% for hover */
+  --primary-press: #5400B8;      /* darkened ~18% for press */
+
+  /* ---- Surfaces ------------------------------------------- */
+  --background: #FFFFFF;          /* base page background */
+  --accent: #F9F9FE;             /* faint violet-tinted fill (hover rows, wells) */
+  --accent-2: #E7E6EB;           /* neutral fill (chips, skeletons) */
+  --accent-3: #C0C0C4;           /* stronger neutral (scrollbar, dividers on dark) */
+  --border: #E4E7EB;             /* hairline borders */
+
+  /* ---- Foreground ----------------------------------------- */
+  --foreground: #2E3033;         /* primary text */
+  --muted-foreground: #616367;   /* secondary / meta text */
+
+  /* ---- Secondary (success / green) ------------------------ */
+  --secondary: #F1FEED;          /* green tint background (badges, banners) */
+  --secondary-foreground: #3F722E;/* green text on green tint */
+
+  /* ---- State opacities ------------------------------------ */
+  --disabled-value-opacity: 0.31; /* @kind other */
+  --disabled-color-opacity: 0.50;
+
+  /* ---- Radius --------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* ---- Spacing scale (8 / 16 / 32 / 48 / 64) -------------- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 32px;
+  --space-4: 48px;
+  --space-5: 64px;
+
+  /* ---- Icon sizing ---------------------------------------- */
+  --icon: 32px;
+
+  /* ---- Elevation (soft, low) ------------------------------ */
+  --shadow-sm: 0 1px 2px rgba(46,48,51,0.06);
+  --shadow-md: 0 4px 16px rgba(46,48,51,0.08);
+  --shadow-lg: 0 12px 32px rgba(46,48,51,0.12);
+
+  /* ---- Type family ---------------------------------------- */
+  --font-sans: 'Geist', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* ---- Type tokens (size / line-height / weight / tracking) */
+  --h1-size: 45px;  --h1-lh: 44px;  --h1-weight: 700; --h1-tracking: -2px;
+  --h2-size: 34px;  --h2-lh: 43px;  --h2-weight: 600; --h2-tracking: -1px;
+  --h3-size: 23px;  --h3-lh: 28px;  --h3-weight: 600; --h3-tracking: -0.4px;
+  --h4-size: 20px;  --h4-lh: 26px;  --h4-weight: 600; --h4-tracking: -0.2px;
+  --p-md-size: 20px; --p-md-lh: 28px; --p-md-weight: 500;
+  --p-sm-size: 17px; --p-sm-lh: 24px; --p-sm-weight: 500;
+  --p-mini-size: 14px; --p-mini-lh: 20px; --p-mini-weight: 500;
+  --caption-size: 12px; --caption-lh: 16px; --caption-weight: 600;
+}
+
+/* ============================================================
+   Semantic type classes
+   ============================================================ */
+.text-h1 { font-family: var(--font-sans); font-size: var(--h1-size); line-height: var(--h1-lh); font-weight: var(--h1-weight); letter-spacing: var(--h1-tracking); color: var(--foreground); }
+.text-h2 { font-family: var(--font-sans); font-size: var(--h2-size); line-height: var(--h2-lh); font-weight: var(--h2-weight); letter-spacing: var(--h2-tracking); color: var(--foreground); }
+.text-h3 { font-family: var(--font-sans); font-size: var(--h3-size); line-height: var(--h3-lh); font-weight: var(--h3-weight); letter-spacing: var(--h3-tracking); color: var(--foreground); }
+.text-h4 { font-family: var(--font-sans); font-size: var(--h4-size); line-height: var(--h4-lh); font-weight: var(--h4-weight); letter-spacing: var(--h4-tracking); color: var(--foreground); }
+.text-p   { font-family: var(--font-sans); font-size: var(--p-md-size); line-height: var(--p-md-lh); font-weight: var(--p-md-weight); color: var(--foreground); }
+.text-p-sm { font-family: var(--font-sans); font-size: var(--p-sm-size); line-height: var(--p-sm-lh); font-weight: var(--p-sm-weight); color: var(--foreground); }
+.text-p-mini { font-family: var(--font-sans); font-size: var(--p-mini-size); line-height: var(--p-mini-lh); font-weight: var(--p-mini-weight); color: var(--muted-foreground); }
+.text-caption { font-family: var(--font-sans); font-size: var(--caption-size); line-height: var(--caption-lh); font-weight: var(--caption-weight); letter-spacing: 0.2px; color: var(--muted-foreground); }
+.text-link { color: var(--primary); text-decoration: none; cursor: pointer; }
+.text-link:hover { text-decoration: underline; }
+
+body { margin:0; background:#F1F1F5; }
+svg[class*="lucide"], i[data-lucide] { flex: none !important; max-width: 100%; }
+</style>
+<style>body{margin:0;background:#F1F1F5}</style>
+</head>
+<body>
+
+
+<div style="font-family: Geist, sans-serif; color: var(--foreground); padding: 48px 40px 80px; display: flex; flex-direction: column; gap: 32px; max-width: 1320px; margin: 0 auto">
+
+  <!-- ============ INTRO ============ -->
+  <section data-screen-label="Состояния и видео — контекст" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+      <img src="data:image/png;base64,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" alt="" style="height: 32px">
+      <h1 style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -1px">Состояния системы и компоненты видео</h1>
+      <span style="font-size: 11px; font-weight: 600; color: var(--primary); background: var(--accent); border: 1px solid var(--accent-2); border-radius: 999px; padding: 3px 10px">канон стекло + пузырь</span>
+    </div>
+    <p style="margin: 12px 0 0; font-size: 15px; color: var(--muted-foreground); max-width: 760px; line-height: 1.5">Группы 3 и 4 фундамента: пустые экраны, ошибки и загрузка — и витринные компоненты видеоплатформы: плеер, действия под видео, комментарии, подписка на канал, загрузка. Канон: действия — в парящей стеклянной тарелке (Д1), комментарии — пузырь-реплики (В1).</p>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 24px">
+      <div style="background: var(--accent); border-radius: 12px; padding: 20px 24px">
+        <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--muted-foreground); margin-bottom: 10px">СОСТОЯНИЯ</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.7">
+          <li>Пустое — иконка-пузырь, заголовок, подсказка, CTA</li>
+          <li>Ошибка — danger #D14343, действие «Повторить»</li>
+          <li>Загрузка — скелетоны + спиннер, пульсация 1.4с</li>
+        </ul>
+      </div>
+      <div style="background: var(--accent); border-radius: 12px; padding: 20px 24px">
+        <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--muted-foreground); margin-bottom: 10px">ВИДЕО</div>
+        <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.7">
+          <li>Плеер — таймлайн-пузырь, буфер, контролы на стекле</li>
+          <li>Действия — стеклянная тарелка (лайк/дизлайк/шер/сохр)</li>
+          <li>Комментарии-пузыри, подписка, дропзона загрузки</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 1. EMPTY STATES ============ -->
+  <section data-screen-label="Пустые состояния" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">СОСТОЯНИЯ · 1</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Пустые состояния</h2>
+    <p style="margin: 0 0 28px; font-size: 14px; color: var(--muted-foreground)">Иконка-пузырь на фоне --accent, заголовок, подсказка, при необходимости — CTA. Центрировано.</p>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+        <div style="width: 64px; height: 64px; border-radius: 20px 20px 20px 6px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 4px"><svg style="width: 30px; height: 30px; color: var(--accent-3)" class="lucide lucide-square-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="18" x="3" y="3" rx="2" /> <path d="m9 8 6 4-6 4Z" /> </svg></div>
+        <div style="font-size: 16px; font-weight: 600">Пока нет подписок</div>
+        <div style="font-size: 13px; color: var(--muted-foreground); line-height: 1.5; max-width: 240px">Подпишитесь на каналы, и их новые видео появятся здесь.</div>
+        <button style="margin-top: 10px; height: 40px; padding: 0 20px; border-radius: 12px 12px 12px 4px; border: none; background: var(--primary); color: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer" style-hover="background: var(--primary-hover)">Смотреть каналы</button>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+        <div style="width: 64px; height: 64px; border-radius: 20px 20px 20px 6px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 4px"><svg style="width: 30px; height: 30px; color: var(--accent-3)" class="lucide lucide-search-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m13.5 8.5-5 5" /> <path d="m8.5 8.5 5 5" /> <circle cx="11" cy="11" r="8" /> <path d="m21 21-4.3-4.3" /> </svg></div>
+        <div style="font-size: 16px; font-weight: 600">Ничего не нашлось</div>
+        <div style="font-size: 13px; color: var(--muted-foreground); line-height: 1.5; max-width: 240px">По запросу «плово» нет результатов. Проверьте написание или попробуйте другие слова.</div>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+        <div style="width: 64px; height: 64px; border-radius: 20px 20px 20px 6px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 4px"><svg style="width: 30px; height: 30px; color: var(--accent-3)" class="lucide lucide-video-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M10.66 6H14a2 2 0 0 1 2 2v2.5l5.248-3.062A.5.5 0 0 1 22 7.87v8.196" /> <path d="M16 16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2" /> <path d="m2 2 20 20" /> </svg></div>
+        <div style="font-size: 16px; font-weight: 600">Ещё нет видео</div>
+        <div style="font-size: 13px; color: var(--muted-foreground); line-height: 1.5; max-width: 240px">Загрузите первое видео — оно появится на канале и в ленте подписчиков.</div>
+        <button style="margin-top: 10px; height: 40px; padding: 0 18px; border-radius: 12px 12px 12px 4px; border: 1px solid var(--border); background: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px" style-hover="background: var(--accent)"><svg style="width: 18px; height: 18px; color: var(--primary)" class="lucide lucide-upload" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <polyline points="17 8 12 3 7 8" /> <line x1="12" x2="12" y1="3" y2="15" /> </svg>Загрузить видео</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 2. ERROR + LOADING ============ -->
+  <section data-screen-label="Ошибки и загрузка" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">СОСТОЯНИЯ · 2</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Ошибки и загрузка</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 20px">
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+        <div style="width: 64px; height: 64px; border-radius: 20px 20px 20px 6px; background: #FBEAEA; display: flex; align-items: center; justify-content: center; margin-bottom: 4px"><svg style="width: 30px; height: 30px; color: #D14343" class="lucide lucide-triangle-alert" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /> <path d="M12 9v4" /> <path d="M12 17h.01" /> </svg></div>
+        <div style="font-size: 16px; font-weight: 600">Видео недоступно</div>
+        <div style="font-size: 13px; color: var(--muted-foreground); line-height: 1.5; max-width: 240px">Это видео удалено или закрыто автором.</div>
+        <button style="margin-top: 10px; height: 40px; padding: 0 20px; border-radius: 12px 12px 12px 4px; border: 1px solid var(--border); background: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer" style-hover="background: var(--accent)">На главную</button>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+        <div style="width: 64px; height: 64px; border-radius: 20px 20px 20px 6px; background: #FBEAEA; display: flex; align-items: center; justify-content: center; margin-bottom: 4px"><svg style="width: 30px; height: 30px; color: #D14343" class="lucide lucide-wifi-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 20h.01" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /> <path d="M5 12.859a10 10 0 0 1 5.17-2.69" /> <path d="M19 12.859a10 10 0 0 0-2.007-1.523" /> <path d="M2 8.82a15 15 0 0 1 4.177-2.643" /> <path d="M22 8.82a15 15 0 0 0-11.288-3.764" /> <path d="m2 2 20 20" /> </svg></div>
+        <div style="font-size: 16px; font-weight: 600">Нет соединения</div>
+        <div style="font-size: 13px; color: var(--muted-foreground); line-height: 1.5; max-width: 240px">Проверьте интернет и попробуйте снова.</div>
+        <button style="margin-top: 10px; height: 40px; padding: 0 20px; border-radius: 12px 12px 12px 4px; border: none; background: var(--primary); color: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px" style-hover="background: var(--primary-hover)"><svg style="width: 17px; height: 17px" class="lucide lucide-rotate-cw" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /> </svg>Повторить</button>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); text-align: center; margin-bottom: 2px">Спиннер + скелетон</div>
+        <div style="display: flex; justify-content: center; padding: 6px 0"><span data-spinner style="width: 32px; height: 32px; border-radius: 999px; border: 3px solid var(--accent-2); border-top-color: var(--primary); display: inline-block"></span></div>
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div data-skeleton style="aspect-ratio: 16/9; border-radius: 12px 12px 12px 4px; background: var(--accent)"></div>
+          <div style="display: flex; gap: 10px">
+            <div data-skeleton style="width: 32px; height: 32px; border-radius: 999px; background: var(--accent); flex: none"></div>
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; padding-top: 2px">
+              <div data-skeleton style="height: 10px; border-radius: 4px; background: var(--accent); width: 90%"></div>
+              <div data-skeleton style="height: 9px; border-radius: 4px; background: var(--accent); width: 55%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 3. PLAYER ============ -->
+  <section data-screen-label="Плеер" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ВИДЕО · 1</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Плеер</h2>
+    <p style="margin: 0 0 24px; font-size: 14px; color: var(--muted-foreground)">Контролы на градиентной подложке снизу. Таймлайн — фирменный пузырь-скруглённая дорожка: буфер, прогресс-фиолет, скруббер-точка.</p>
+
+    <div style="max-width: 720px">
+      <div style="position: relative; aspect-ratio: 16/9; border-radius: 12px 12px 12px 4px; background: linear-gradient(135deg, #2E3033, #4A4D52); overflow: hidden">
+        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center"><div style="width: 68px; height: 68px; border-radius: 999px; background: rgba(255,255,255,0.16); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg style="width: 30px; height: 30px; color: #fff; margin-left: 3px" class="lucide lucide-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <polygon points="6 3 20 12 6 21 6 3" /> </svg></div></div>
+        <div style="position: absolute; top: 0; left: 0; right: 0; padding: 16px; background: linear-gradient(180deg, rgba(0,0,0,0.45), transparent); color: #fff; font-size: 15px; font-weight: 600">Плов в казане — пошаговый рецепт для новичков</div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 16px 14px; background: linear-gradient(0deg, rgba(0,0,0,0.5), transparent)">
+          <div style="position: relative; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.25); margin-bottom: 12px; cursor: pointer">
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 62%; border-radius: 999px; background: rgba(255,255,255,0.4)"></div>
+            <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 38%; border-radius: 999px; background: var(--primary)"></div>
+            <div style="position: absolute; left: 38%; top: 50%; transform: translate(-50%, -50%); width: 14px; height: 14px; border-radius: 999px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.4)"></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 16px; color: #fff">
+            <svg style="width: 22px; height: 22px; cursor: pointer" class="lucide lucide-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <polygon points="6 3 20 12 6 21 6 3" /> </svg>
+            <svg style="width: 20px; height: 20px; cursor: pointer" class="lucide lucide-skip-forward" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <polygon points="5 4 15 12 5 20 5 4" /> <line x1="19" x2="19" y1="5" y2="19" /> </svg>
+            <div style="display: flex; align-items: center; gap: 8px"><svg style="width: 20px; height: 20px; cursor: pointer" class="lucide lucide-volume-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" /> <path d="M16 9a5 5 0 0 1 0 6" /> <path d="M19.364 18.364a9 9 0 0 0 0-12.728" /> </svg><div style="width: 60px; height: 4px; border-radius: 999px; background: rgba(255,255,255,0.3); position: relative"><div style="position: absolute; left: 0; top: 0; bottom: 0; width: 70%; border-radius: 999px; background: #fff"></div></div></div>
+            <span style="font-size: 13px; font-weight: 500; font-variant-numeric: tabular-nums">4:48 / 12:48</span>
+            <div style="flex: 1"></div>
+            <span style="font-size: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,0.5); border-radius: 5px; padding: 1px 6px; cursor: pointer">1×</span>
+            <svg style="width: 20px; height: 20px; cursor: pointer" class="lucide lucide-settings" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /> <circle cx="12" cy="12" r="3" /> </svg>
+            <svg style="width: 20px; height: 20px; cursor: pointer" class="lucide lucide-captions" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="14" x="3" y="5" rx="2" ry="2" /> <path d="M7 15h4M15 15h2M7 11h2M13 11h4" /> </svg>
+            <svg style="width: 20px; height: 20px; cursor: pointer" class="lucide lucide-maximize" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M8 3H5a2 2 0 0 0-2 2v3" /> <path d="M21 8V5a2 2 0 0 0-2-2h-3" /> <path d="M3 16v3a2 2 0 0 0 2 2h3" /> <path d="M16 21h3a2 2 0 0 0 2-2v-3" /> </svg>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap">
+        <div>
+          <div style="font-size: 12px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 8px">Меню качества (на стекле)</div>
+          <div style="width: 180px; border-radius: 12px 12px 12px 4px; background: rgba(46,48,51,0.92); backdrop-filter: blur(10px); box-shadow: var(--shadow-md); padding: 6px; display: flex; flex-direction: column; gap: 2px">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 9px 9px 9px 3px; font-size: 14px; color: #fff; background: rgba(255,255,255,0.12); cursor: pointer"><svg style="width: 15px; height: 15px; color: var(--primary)" class="lucide lucide-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 6 9 17l-5-5" /> </svg>1080p</div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 37px; border-radius: 9px 9px 9px 3px; font-size: 14px; color: #fff; cursor: pointer" style-hover="background: rgba(255,255,255,0.08)">720p</div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 37px; border-radius: 9px 9px 9px 3px; font-size: 14px; color: #fff; cursor: pointer" style-hover="background: rgba(255,255,255,0.08)">480p</div>
+            <div style="display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 37px; border-radius: 9px 9px 9px 3px; font-size: 14px; color: #fff; cursor: pointer" style-hover="background: rgba(255,255,255,0.08)">Авто</div>
+          </div>
+        </div>
+        <div style="flex: 1; min-width: 200px; font-size: 13px; color: var(--muted-foreground); line-height: 1.6; padding-top: 26px">Таймлайн: светлая дорожка — буфер, фиолетовая — просмотрено, белая точка — позиция. Контролы появляются по наведению, исчезают через 2с.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. WATCH ACTIONS (canon Д1) ============ -->
+  <section data-screen-label="Действия под видео" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ВИДЕО · 2</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Действия под видео</h2>
+    <p style="margin: 0 0 24px; font-size: 14px; color: var(--muted-foreground)">Строка под плеером: канал + подписка слева, действия — в парящей стеклянной тарелке справа (канон Д1). Иконки без подписей, счётчик — только на лайке.</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px 14px; align-items: center; justify-content: space-between">
+      <div style="display: flex; align-items: center; gap: 14px">
+        <div style="width: 44px; height: 44px; border-radius: 999px; background: #3F722E; color: #fff; font-weight: 700; font-size: 17px; display: flex; align-items: center; justify-content: center">К</div>
+        <div style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600">Кухня дома</span><span style="font-size: 13px; color: var(--muted-foreground)">845 тыс. подписчиков</span></div>
+        <button style="height: 40px; padding: 0 20px; border-radius: 12px 12px 12px 4px; border: none; background: var(--primary); color: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; margin-left: 6px" style-hover="background: var(--primary-hover)">Подписаться</button>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.72); backdrop-filter: blur(14px); border: 1px solid rgba(228,231,235,0.7); box-shadow: var(--shadow-md); border-radius: 16px 16px 16px 5px; padding: 5px">
+        <div style="display: flex; align-items: center; gap: 7px; height: 38px; padding: 0 14px; border-radius: 12px 12px 12px 4px; cursor: pointer; color: var(--primary)" style-hover="background: var(--accent)"><svg style="width: 19px; height: 19px" class="lucide lucide-thumbs-up" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M7 10v12" /> <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /> </svg><span style="font-size: 14px; font-weight: 600">12 тыс.</span></div>
+        <div style="width: 1px; height: 20px; background: var(--border)"></div>
+        <div style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 12px 12px 12px 4px; cursor: pointer" style-hover="background: var(--accent)"><svg style="width: 19px; height: 19px" class="lucide lucide-thumbs-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M17 14V2" /> <path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z" /> </svg></div>
+        <div style="width: 1px; height: 20px; background: var(--border)"></div>
+        <div style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 12px 12px 12px 4px; cursor: pointer" style-hover="background: var(--accent)"><svg style="width: 19px; height: 19px" class="lucide lucide-share-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="18" cy="5" r="3" /> <circle cx="6" cy="12" r="3" /> <circle cx="18" cy="19" r="3" /> <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /> <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /> </svg></div>
+        <div style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 12px 12px 12px 4px; cursor: pointer" style-hover="background: var(--accent)"><svg style="width: 19px; height: 19px" class="lucide lucide-bookmark" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" /> </svg></div>
+        <div style="display: flex; align-items: center; height: 38px; padding: 0 12px; border-radius: 12px 12px 12px 4px; cursor: pointer" style-hover="background: var(--accent)"><svg style="width: 20px; height: 20px" class="lucide lucide-ellipsis" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" /> <circle cx="5" cy="12" r="1" /> </svg></div>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; background: var(--accent); border-radius: 12px 12px 12px 4px; padding: 14px 16px">
+      <div style="font-size: 14px; font-weight: 600; margin-bottom: 6px">124 тыс. просмотров • 3 дня назад <span style="color: var(--primary); margin-left: 8px">#рецепты</span> <span style="color: var(--primary)">#плов</span></div>
+      <div style="font-size: 14px; line-height: 1.55; color: var(--foreground)">Готовим настоящий узбекский плов в казане на открытом огне. Все пропорции и тайминги — ниже. <span style="font-weight: 600; cursor: pointer">Ещё</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 5. COMMENTS (canon В1) ============ -->
+  <section data-screen-label="Комментарии" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ВИДЕО · 3</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Комментарии</h2>
+    <p style="margin: 0 0 24px; font-size: 14px; color: var(--muted-foreground)">Канон В1 — пузырь-реплики: реплика в пузыре с острым углом у аватара, реакция-пилюля наезжает на нижний край. Прямая связь с логотипом-пузырём.</p>
+    <div style="max-width: 720px">
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px">
+        <span style="font-size: 17px; font-weight: 700">348 комментариев</span>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted-foreground); cursor: pointer"><svg style="width: 17px; height: 17px" class="lucide lucide-arrow-down-up" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m3 16 4 4 4-4" /> <path d="M7 20V4" /> <path d="m21 8-4-4-4 4" /> <path d="M17 4v16" /> </svg>Сначала интересные</div>
+      </div>
+
+      <!-- composer -->
+      <div style="display: flex; gap: 12px; margin-bottom: 32px">
+        <div style="width: 40px; height: 40px; border-radius: 999px; background: var(--primary); color: #fff; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center; flex: none">К</div>
+        <div style="flex: 1">
+          <div style="border-bottom: 1.5px solid var(--primary); padding: 6px 2px; font-size: 15px">Оставьте комментарий…<span style="display: inline-block; width: 1.5px; height: 17px; background: var(--primary); margin-left: 1px; vertical-align: text-bottom"></span></div>
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px">
+            <button style="height: 38px; padding: 0 18px; border-radius: 12px 12px 12px 4px; border: none; background: transparent; font: inherit; font-size: 14px; font-weight: 600; color: var(--muted-foreground); cursor: pointer" style-hover="background: var(--accent)">Отмена</button>
+            <button style="height: 38px; padding: 0 18px; border-radius: 12px 12px 12px 4px; border: none; background: var(--primary); color: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer" style-hover="background: var(--primary-hover)">Отправить</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- bubble thread -->
+      <div style="display: flex; flex-direction: column; gap: 22px">
+
+        <!-- comment 1 + author reply -->
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; gap: 12px; align-items: flex-end">
+            <div style="width: 40px; height: 40px; border-radius: 999px; background: var(--foreground); color: #fff; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center; flex: none">М</div>
+            <div style="flex: 1; min-width: 0">
+              <div style="background: var(--accent); border-radius: 16px 16px 16px 3px; padding: 11px 15px">
+                <div style="font-size: 13px; margin-bottom: 2px"><b>@maxim</b> <span style="color: var(--muted-foreground); font-weight: 500; font-size: 12px">2 дня назад</span></div>
+                <div style="font-size: 15px; line-height: 1.5">Наконец-то нормальный рецепт без воды. Сделал по шагам — получилось с первого раза 🔥</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-left: 14px">
+                <div style="display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow-sm); border-radius: 999px; padding: 3px 10px; margin-top: -10px; cursor: pointer"><svg style="width: 14px; height: 14px; color: var(--primary)" class="lucide lucide-thumbs-up" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M7 10v12" /> <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /> </svg><span style="font-size: 12px; font-weight: 600">1,2 тыс.</span></div>
+                <span style="font-size: 12px; font-weight: 600; color: var(--muted-foreground); cursor: pointer">Ответить</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- author reply, indented -->
+          <div style="display: flex; gap: 12px; align-items: flex-end; margin-left: 40px">
+            <div style="width: 34px; height: 34px; border-radius: 999px; background: #3F722E; color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex: none">К</div>
+            <div style="flex: 1; min-width: 0">
+              <div style="background: var(--accent); border: 1px solid var(--accent-2); border-radius: 16px 16px 16px 3px; padding: 11px 15px">
+                <div style="font-size: 13px; margin-bottom: 2px"><b>@kuhnyadoma</b> <span style="font-size: 11px; font-weight: 600; color: var(--primary); background: #fff; border: 1px solid var(--accent-2); border-radius: 999px; padding: 1px 8px; margin: 0 4px">автор</span> <span style="color: var(--muted-foreground); font-weight: 500; font-size: 12px">1 день назад</span></div>
+                <div style="font-size: 15px; line-height: 1.5">Спасибо! Рады, что получилось 🙌</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-left: 14px">
+                <div style="display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow-sm); border-radius: 999px; padding: 3px 10px; margin-top: -10px; cursor: pointer"><svg style="width: 14px; height: 14px; color: var(--primary)" class="lucide lucide-thumbs-up" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M7 10v12" /> <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /> </svg><span style="font-size: 12px; font-weight: 600">86</span></div>
+                <span style="font-size: 12px; font-weight: 600; color: var(--muted-foreground); cursor: pointer">Ответить</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- comment 2 -->
+        <div style="display: flex; gap: 12px; align-items: flex-end">
+          <div style="width: 40px; height: 40px; border-radius: 999px; background: var(--primary); color: #fff; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center; flex: none">А</div>
+          <div style="flex: 1; min-width: 0">
+            <div style="background: var(--accent); border-radius: 16px 16px 16px 3px; padding: 11px 15px">
+              <div style="font-size: 13px; margin-bottom: 2px"><b>@anna_k</b> <span style="color: var(--muted-foreground); font-weight: 500; font-size: 12px">5 часов назад</span></div>
+              <div style="font-size: 15px; line-height: 1.5">А какой рис лучше брать? В магазине глаза разбегаются 😅</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; margin-left: 14px">
+              <div style="display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow-sm); border-radius: 999px; padding: 3px 10px; margin-top: -10px; cursor: pointer"><svg style="width: 14px; height: 14px" class="lucide lucide-thumbs-up" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M7 10v12" /> <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /> </svg><span style="font-size: 12px; font-weight: 600">14</span></div>
+              <span style="font-size: 12px; font-weight: 600; color: var(--muted-foreground); cursor: pointer">Ответить</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px; margin: 12px 0 0 14px; color: var(--primary); font-size: 13px; font-weight: 600; cursor: pointer"><svg style="width: 16px; height: 16px" class="lucide lucide-chevron-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m6 9 6 6 6-6" /> </svg>3 ответа</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. SUBSCRIBE + UPLOAD ============ -->
+  <section data-screen-label="Подписка и загрузка" style="background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 40px">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--primary)">ВИДЕО · 4</div>
+    <h2 style="margin: 6px 0 8px; font-size: 24px; font-weight: 700; letter-spacing: -1px">Подписка и загрузка</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 20px">
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 24px">
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 16px">Состояния подписки</div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; align-items: center; gap: 12px"><span style="width: 92px; font-size: 12px; color: var(--accent-3); flex: none">не подписан</span>
+            <button style="height: 40px; padding: 0 22px; border-radius: 12px 12px 12px 4px; border: none; background: var(--primary); color: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer" style-hover="background: var(--primary-hover)">Подписаться</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px"><span style="width: 92px; font-size: 12px; color: var(--accent-3); flex: none">подписан</span>
+            <button style="height: 40px; padding: 0 18px; border-radius: 12px 12px 12px 4px; border: 1px solid var(--border); background: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px" style-hover="background: var(--accent)"><svg style="width: 17px; height: 17px" class="lucide lucide-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 6 9 17l-5-5" /> </svg>Вы подписаны</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px"><span style="width: 92px; font-size: 12px; color: var(--accent-3); flex: none">+ колокольчик</span>
+            <div style="display: flex; align-items: center; height: 40px; border: 1px solid var(--border); border-radius: 12px 12px 12px 4px; overflow: hidden">
+              <div style="display: flex; align-items: center; gap: 8px; padding: 0 16px; height: 100%; font-size: 14px; font-weight: 600; cursor: pointer" style-hover="background: var(--accent)"><svg style="width: 17px; height: 17px" class="lucide lucide-check" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 6 9 17l-5-5" /> </svg>Вы подписаны</div>
+              <div style="width: 1px; height: 20px; background: var(--border)"></div>
+              <div style="display: flex; align-items: center; padding: 0 14px; height: 100%; cursor: pointer; color: var(--primary)" style-hover="background: var(--accent)"><svg style="width: 18px; height: 18px" class="lucide lucide-bell-ring" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /> <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /> <path d="M4 2C2.8 3.7 2 5.7 2 8" /> <path d="M22 8c0-2.3-.8-4.3-2-6" /> </svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border: 1px solid var(--border); border-radius: 12px; padding: 24px">
+        <div style="font-size: 13px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 16px">Дропзона и прогресс</div>
+        <div style="border: 1.5px dashed var(--accent-3); border-radius: 14px 14px 14px 5px; background: var(--accent); padding: 28px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; margin-bottom: 16px">
+          <div style="width: 52px; height: 52px; border-radius: 16px 16px 16px 5px; background: #fff; box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center"><svg style="width: 26px; height: 26px; color: var(--primary)" class="lucide lucide-cloud-upload" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 13v8" /> <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" /> <path d="m8 17 4-4 4 4" /> </svg></div>
+          <div style="font-size: 15px; font-weight: 600">Перетащите файлы сюда</div>
+          <div style="font-size: 13px; color: var(--muted-foreground)">или выберите на устройстве</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div style="width: 60px; height: 40px; border-radius: 8px 8px 8px 3px; background: var(--accent-2); flex: none; display: flex; align-items: center; justify-content: center"><svg style="width: 18px; height: 18px; color: var(--muted-foreground)" class="lucide lucide-film" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M7 3v18" /> <path d="M3 7.5h4" /> <path d="M3 12h18" /> <path d="M3 16.5h4" /> <path d="M17 3v18" /> <path d="M17 7.5h4" /> <path d="M17 16.5h4" /> </svg></div>
+          <div style="flex: 1; min-width: 0">
+            <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px"><span style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">plov-final.mp4</span><span style="color: var(--muted-foreground); flex: none; margin-left: 8px">64%</span></div>
+            <div style="height: 6px; border-radius: 999px; background: var(--accent-2); position: relative"><div style="position: absolute; left: 0; top: 0; bottom: 0; width: 64%; border-radius: 999px; background: var(--primary)"></div></div>
+          </div>
+          <div style="width: 30px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex: none" style-hover="background: var(--accent)"><svg style="width: 17px; height: 17px" class="lucide lucide-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M18 6 6 18" /> <path d="m6 6 12 12" /> </svg></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+
+</body>
+</html>
